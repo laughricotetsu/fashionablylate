@@ -19,9 +19,9 @@ return new class extends Migration
                 ->constrained('categories') // categoriesテーブルのidを参照
                  ->cascadeOnDelete(); // 親削除時に子も削除（任意）
 
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            //$table->foreignId('user_id')
+               // ->constrained('users')
+                //->cascadeOnDelete();
 
             // 基本情報
             $table->string('first_name', 255);
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->tinyInteger('gender'); // 1:男性, 2:女性, 3:その他
 
             $table->string('email', 255);
-            $table->string('tell', 255);
+            $table->string('tel', 255);
             $table->string('address', 255);
             $table->string('building', 255)->nullable(); 
             $table->text('detail');

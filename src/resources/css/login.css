@@ -1,0 +1,107 @@
+.login-page {
+    min-height: 100vh;
+    background-color: #f7f0e8;
+    color: #8b6b5c;
+    font-family: "Noto Serif JP", serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* タイトル */
+.site-title {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.05em;
+}
+
+.login-title {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+}
+
+/* registerボタン（右上） */
+.register-button {
+    position: absolute;
+    top: 24px;
+    right: 40px;
+    font-size: 0.85rem;
+    color: #d2bfb0;
+    border: 1px solid #d2bfb0;
+    border-radius: 4px;
+    padding: 4px 10px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.register-button:hover {
+    background-color: #e7dbcf;
+    color: #5b4635;
+}
+
+/* ログインフォームボックス */
+.login-box {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e3d6c9;
+    border-radius: 10px;
+    padding: 40px 35px;
+    width: 360px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* フォーム項目 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #5b4635;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d8cbbd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #5b4635;
+    background-color: #fff;
+}
+
+.form-group input::placeholder {
+    color: #d0c2b5;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #c3a999;
+    box-shadow: 0 0 3px #c3a999;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: #e53e3e;
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+/* ログインボタン */
+.login-button-main {
+    background-color: #8b6b5c;
+    color: #fff;
+    border: none;
+    padding: 10px 60px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-button-main:hover {
+    background-color: #72584b;
+}
