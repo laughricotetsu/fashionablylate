@@ -3,75 +3,78 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ContactRequest;
 use App\Models\Category;
 use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    /**
-     * 入力画面表示
-     */
-    public function index()
+    public function index(ContactRequest $request)
     {
-        $categories = \App\Models\Category::all();
-        return view('contacts.form', compact('categories'));
+        // セッションから保存済みの入力を取得（なければ空配列）
+        $inputs = $request->session()->get('inputs', []);
+
+        $categories = Category::all();
+
+        // view名は実際のファイル名に合わせてください（例: contacts.form）
+        return view('contacts.form', compact('categories', 'inputs'));
     }
-    /**
-     * 確認画面表示
-     */
+
     public function confirm(Request $request)
-{
-        $validated = $request->validate([
-        'last_name' => 'required',
-        'first_name' => 'required',
-        'gender' => 'required',
-        'email' => 'required|email',
-        'tel_first' => 'required|digits_between:1,5|numeric',
-        'tel_second' => 'required|digits_between:1,5|numeric',
-        'tel_third' => 'required|digits_between:1,5|numeric',
-        'address' => 'required',
-        'building' => 'nullable|string|max:255',
-        'category_id' => 'required',
-        'detail' => 'required|max:120',
-    ]);
-
-    $validated['tel'] = $validated['tel_first'] . $validated['tel_second'] . $validated['tel_third'];
-
-    return view('contacts.confirm',['inputs'=> $validated]);
-
-  // カテゴリー名を取得
-    $category = \App\Models\Category::find($validated['category_id']);
-    $validated['category_name'] = $category ? $category->content : '';
-
-    return view('contacts.confirm', [
-        'inputs' => $validated
-    ]);
-}
-
-public function store(Request $request)
     {
-        $action = $request->input('action');
-
-        // 「修正」ボタンが押された場合はフォームに戻る
-        if ($action === 'back') {
-        return redirect()->route('contacts.index')->withInput();
-        }
-
-        // データをDBに保存
-        Contact::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'gender' => $request->input('gender'),
-            'email' => $request->input('email'),
-            'tel' => $request->input('tel'),
-            'address' => $request->input('address'),
-            'category_id' => $request->input('category_id'),
-            'detail' => $request->input('detail'),
+        // バリデーション
+        $validated = $request->validate([
+            'last_name'   => 'required',
+            'first_name'  => 'required',
+            'gender'      => 'required',
+            'email'       => 'required|email',
+            'tel_first'   => 'required|digits_between:1,5|numeric',
+            'tel_second'  => 'required|digits_between:1,5|numeric',
+            'tel_third'   => 'required|digits_between:1,5|numeric',
+            'address'     => 'required',
+            'building'    => 'nullable|string|max:255',
+            'category_id' => 'required',
+            'detail'      => 'required|max:120',
         ]);
 
-       // \App\Models\Contact::create($validated);
+        // 電話番号を結合して1つの値に（必要ならハイフン無し）
+        $validated['tel'] = $validated['tel_first'] . $validated['tel_second'] . $validated['tel_third'];
 
+        // カテゴリ名を追加（表示用）
+        $category = Category::find($validated['category_id']);
+        $validated['category_name'] = $category ? $category->content : '';
+
+        // セッションに保存（修正で戻ったときに使う）
+        $request->session()->put('inputs', $validated);
+
+        // 確認画面へ（ビュー名は contacts.confirm など実ファイル名に合わせて下さい）
+        return view('contacts.confirm', ['inputs' => $validated]);
+    }
+
+    public function store(Request $request)
+    {
+        // 修正ボタンを押すときはここに来ない想定（修正は GET にしているため）
+        // 送信処理はセッションから取得して保存するのが安全
+        $inputs = $request->session()->get('inputs', []);
+
+        // 必要なら再度バリデーション（省略可）
+        // 保存
+        Contact::create([
+            'last_name'   => $inputs['last_name'],
+            'first_name'  => $inputs['first_name'],
+            'gender'      => $inputs['gender'],
+            'email'       => $inputs['email'],
+            'tel'         => $inputs['tel'],
+            'address'     => $inputs['address'],
+            'building'    => $inputs['building'] ?? null,
+            'category_id' => $inputs['category_id'],
+            'detail'      => $inputs['detail'],
+            // 'user_id' => auth()->id(), // 必要なら追加
+        ]);
+
+        // セッションを消す
+        $request->session()->forget('inputs');
+
+        // サンクスへ
         return redirect()->route('contacts.thanks');
     }
 
@@ -80,5 +83,3 @@ public function store(Request $request)
         return view('contacts.thanks');
     }
 }
-
-

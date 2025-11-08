@@ -67,7 +67,8 @@
             @endforeach
 
             <div class="buttons">
-                <button type="submit" name="action" value="back" formaction="{{ route('contacts.index') }}">修正</button>
+                <button type="button" onclick="window.location.href='{{ route('contacts.index') }}'">修正</button>
+
                 <button type="submit" name="action" value="submit">送信</button>
             </div>
         </form>
