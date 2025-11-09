@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    public function index(ContactRequest $request)
+    public function index(Request $request)
     {
         // セッションから保存済みの入力を取得（なければ空配列）
         $inputs = $request->session()->get('inputs', []);
