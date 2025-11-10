@@ -3,48 +3,41 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 
-<div class="register-page">
-    <a href="{{ route('login') }}" class="login-button">login</a>
+<div class="register-container">
+    <a href="/login" class="login-button">login</a>
 
-    <h1 class="site-title">FashionablyLate</h1>
-    <p class="register-title">Register</p>
+    <h1>register</h1>
 
     <div class="register-box">
-        <form method="POST" action="{{ route('register.store') }}">
-            @csrf
+   <form action="/register" method="POST">
+    @csrf
+    <div>
+        <label>お名前</label>
+        <input type="text" name="name" value="{{ old('name') }}" placeholder="例: 山田 太郎">
+        @error('name')
+            <div class="error">{{ $message }}</div>
+        @enderror
+    </div>
 
-            {{-- 名前 --}}
-            <div class="form-group">
-                <label for="name">お名前</label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="例：山田 太郎">
-                @error('name')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
-            </div>
+    <div>
+        <label>メールアドレス</label>
+        <input type="email" name="email" value="{{ old('email') }}" placeholder="例: test@example.com">
+        @error('email')
+            <div class="error">{{ $message }}</div>
+        @enderror
+    </div>
 
-            {{-- メール --}}
-            <div class="form-group">
-                <label for="email">メールアドレス</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="例：test@example.com">
-                @error('email')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
-            </div>
+    <div>
+        <label>パスワード</label>
+        <input type="password" name="password" placeholder="例: coachtechno6">
+        @error('password')
+            <div class="error">{{ $message }}</div>
+        @enderror
+    </div>
 
-            {{-- パスワード --}}
-            <div class="form-group">
-                <label for="password">パスワード</label>
-                <input type="password" id="password" name="password" placeholder="例：coachtech06">
-                @error('password')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
-            </div>
+    <button type="submit" class="submit-btn">登録</button>
+</form>
 
-            {{-- 登録ボタン --}}
-            <div class="form-group text-center">
-                <button type="submit" class="register-button">登録</button>
-            </div>
-        </form>
     </div>
 </div>
 @endsection

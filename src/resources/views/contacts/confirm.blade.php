@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お問い合わせ内容確認</title>
-    <link rel="stylesheet" href="{{ asset('css/confirm.css') }}">
-</head>
+@extends('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/confirm.css') }}">
+@endsection
+
+@section('content')
 <body>
     <div class="confirm-container">
         <h1>Confirm</h1>

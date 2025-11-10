@@ -4,13 +4,13 @@
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
 <div class="login-page">
-    <a href="{{ route('register') }}" class="register-button">register</a>
+    <a href="/register" class="register-button">register</a>
 
-    <h1 class="site-title">FashionablyLate</h1>
-    <p class="login-title">Login</p>
+    <h2 class="site-title">Login</h2>
+
 
     <div class="login-box">
-        <form method="POST" action="{{ route('login.store') }}">
+        <form method="POST" action="/login" method="post">
             @csrf
 
             {{-- メールアドレス --}}
