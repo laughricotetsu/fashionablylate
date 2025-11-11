@@ -7,6 +7,12 @@
 @endpush
 
 @section('content')
+
+<body>
+    <header class="header">
+        <h1 class="site-title">FashionablyLate</h1>
+    </header>
+
 <div class="contact-container">
     <h2 class="page-title">Contact</h2>
 

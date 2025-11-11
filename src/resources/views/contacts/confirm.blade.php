@@ -6,8 +6,14 @@
 
 @section('content')
 <body>
+
+    <header class="header">
+        <h1 class="site-title">FashionablyLate</h1>
+    </header>
+
+
     <div class="confirm-container">
-        <h1>Confirm</h1>
+        <h2>Confirm</h2>
 
         <table class="confirm-table">
             <tr>

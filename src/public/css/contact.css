@@ -1,9 +1,10 @@
 body {
     font-family: 'Noto Sans JP', sans-serif;
     background-color: #f7f4ef;
-    color: #333;
+    color: #a4a1a1;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 .contact-header {

@@ -1,41 +1,36 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | FashionablyLate</title>
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1 class="site-title">FashionablyLate</h1>
+        <a href="/register" class="header-link">register</a>
+    </header>
 
-@section('content')
-<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <main class="main">
+        <h2 class="page-title">Login</h2>
 
-<div class="login-page">
-    <a href="/register" class="register-button">register</a>
+        <div class="form-container">
+            <form action="/login" method="POST">
+                @csrf
 
-    <h2 class="site-title">Login</h2>
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" name="email" id="email" placeholder="例: test@example.com" value="{{ old('email') }}">
+                    @error('email')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>
 
-
-    <div class="login-box">
-        <form method="POST" action="/login" method="post">
-            @csrf
-
-            {{-- メールアドレス --}}
-            <div class="form-group">
-                <label for="email">メールアドレス</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="例：test@example.com">
-                @error('email')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
-            </div>
-
-            {{-- パスワード --}}
-            <div class="form-group">
-                <label for="password">パスワード</label>
-                <input type="password" id="password" name="password" placeholder="例：coachtech06">
-                @error('password')
-                    <p class="error-message">{{ $message }}</p>
-                @enderror
-            </div>
-
-            {{-- ログインボタン --}}
-            <div class="form-group text-center">
-                <button type="submit" class="login-button-main">ログイン</button>
-            </div>
-        </form>
-    </div>
-</div>
-@endsection
+                <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" name="password" id="password" placeholder="例: coachtechno6">
+                    @error('password')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>

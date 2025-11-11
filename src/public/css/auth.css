@@ -1,0 +1,114 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f9f1e7;
+    
+    color: #5b4a3f;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 40px 20px 10px;
+}
+
+.site-title {
+    font-size: 26px;
+    font-weight: 400;
+    margin: 0;
+    color: #6b5440;
+}
+
+.header-link {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    color: #d3c7b8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.header-link:hover {
+    color: #a48c75;
+}
+
+/* ===== メイン ===== */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding-bottom: 60px;
+}
+
+.page-title {
+    font-size: 24px;
+    margin: 20px 0;
+    color: #7b6c5f;
+}
+
+/* ===== フォーム全体 ===== */
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 380px;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d8d2c4;
+    border-radius: 6px;
+    background-color: #fdfaf7;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #d0c7b9;
+}
+
+/* ===== エラーメッセージ ===== */
+.error {
+    color: #d9534f;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* ===== ボタン ===== */
+.submit-btn {
+    width: 100%;
+    background-color: #7b6c5f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #5f4d3f;
+}

@@ -11,7 +11,11 @@
 .header__logo {
     color: #987777;
     text-decoration: none;
-    text-align: center;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 50px;
+}
+
+.title {
+    font-size: 16px;
+    text-align: center;
 }
