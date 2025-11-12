@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | FashionablyLate</title>
-    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
-</head>
+@extends('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+@endsection
+
+@section('content')
+
 <body>
     <header class="header">
         <h1 class="site-title">FashionablyLate</h1>
@@ -34,3 +34,10 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <button type="submit" class="submit-btn">ログイン</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

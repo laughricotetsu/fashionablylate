@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Contact')
-
-@push('styles')
+@section('css')
 <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
-@endpush
+@endsection
 
 @section('content')
 
@@ -13,7 +11,7 @@
         <h1 class="site-title">FashionablyLate</h1>
     </header>
 
-<div class="contact-container">
+<main class="main">
     <h2 class="page-title">Contact</h2>
 
      @if ($errors->any())
@@ -26,13 +24,13 @@
      </div>
      @endif
 
-    <form action="{{ url('/confirm') }}" method="POST" class="contact-form">
+    <form action="{{ route('contacts.confirm') }}" method="POST" class="contact-form">
         @csrf
 
         {{-- お名前 --}}
-        <div class="form-group name-group">
+        <div class="form-row">
             <label>お名前 <span class="required">※</span></label>
-            <div class="name-inputs">
+            <div class="input-group">
                 <input type="text" name="last_name" value="{{ old('last_name',$inputs['last_name'] ?? '') }}" placeholder="例: 山田">
                 <input type="text" name="first_name" value="{{ old('first_name',$inputs['first_name'] ?? '') }}" placeholder="例: 太郎">
             </div>
@@ -41,7 +39,7 @@
         </div>
 
         {{-- 性別 --}}
-        <div class="form-group">
+        <div class="form-row">
             <label>性別 <span class="required">※</span></label>
             <div class="gender-inputs">
                 <label><input type="radio" name="gender" value="1" {{ old('gender', $inputs['gender'] ?? '') == '1' ? 'checked' : '' }}> 男性</label>
@@ -52,14 +50,14 @@
         </div>
 
         {{-- メールアドレス --}}
-        <div class="form-group">
+        <div class="form-row">
             <label>メールアドレス <span class="required">※</span></label>
             <input type="email" name="email" value="{{ old('email',$inputs['email'] ?? '') }}" placeholder="例: test@example.com">
             @error('email')<p class="error">{{ $message }}</p>@enderror
         </div>
 
         {{-- 電話番号 --}}
-        <div class="form-group">
+        <div class="form-row">
             <label>電話番号 <span class="required">※</span></label>
             <div class="tel-inputs">
                 <input type="text" name="tel_first" maxlength="5" value="{{ old('tel_first',$inputs['tel_first'] ?? '') }}" placeholder="例: 080">
@@ -74,20 +72,20 @@
         </div>
 
         {{-- 住所 --}}
-        <div class="form-group">
+        <div class="form-row">
             <label>住所 <span class="required">※</span></label>
             <input type="text" name="address" value="{{ old('address',$inputs['address'] ?? '') }}" placeholder="例: 東京都渋谷区千駄ヶ谷1-2-3">
             @error('address')<p class="error">{{ $message }}</p>@enderror
         </div>
 
         {{-- 建物名 --}}
-        <div class="form-group">
+        <div class="form-row">
             <label>建物名</label>
             <input type="text" name="building" value="{{ old('building',$inputs['building'] ?? '') }}" placeholder="例: 千駄ヶ谷マンション101">
         </div>
 
         {{-- お問い合わせの種類 --}}
-    <div class="form-group">
+    <div class="form-row">
     <label for="category_id">お問い合わせの種類 <span class="required">※</span></label>
     <select name="category_id" id="category_id" required>
         <option value="">選択してください</option>
@@ -101,16 +99,17 @@
     </div>
 
         {{-- お問い合わせ内容 --}}
-        <div class="form-group">
+        <div class="form-row">
             <label>お問い合わせ内容 <span class="required">※</span></label>
             <textarea name="detail" rows="5" placeholder="お問い合せ内容をご記載ください">{{ old('detail',$inputs['detail'] ?? '') }}</textarea>
             @error('detail')<p class="error">{{ $message }}</p>@enderror
         </div>
 
         {{-- 確認画面へ --}}
-        <div class="form-button">
+        <div class="button-area">
             <button type="submit" class="confirm-btn">確認画面</button>
         </div>
     </form>
-</div>
+</main>
+</body>
 @endsection
