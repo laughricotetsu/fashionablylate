@@ -16,7 +16,6 @@ class ContactController extends Controller
 
         $categories = Category::all();
 
-        // view名は実際のファイル名に合わせてください（例: contacts.form）
         return view('contacts.form', compact('categories', 'inputs'));
     }
 
@@ -82,5 +81,13 @@ class ContactController extends Controller
     public function thanks()
     {
         return view('contacts.thanks');
+    }
+
+    public function admin(Request $request)
+    {
+        $categories = Category::all();
+        $contacts = Contact::with('category')->paginate(10);
+
+        return view('contacts.admin',compact('contacts','categories'));
     }
 }
