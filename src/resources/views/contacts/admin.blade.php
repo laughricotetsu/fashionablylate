@@ -14,32 +14,7 @@
     <main class="admin-main">
         <h2 class="page-title">Admin</h2>
 
-        {{-- 検索フォーム --}}
-        <form action="{{ route('admin.search') }}" method="GET" class="search-form">
-            <input type="text" name="keyword" placeholder="名前やメールアドレスを入力してください">
-            <select name="gender">
-                <option value="">性別</option>
-                <option value="1">男性</option>
-                <option value="2">女性</option>
-                <option value="3">その他</option>
-            </select>
-            <select name="category_id">
-                <option value="">お問い合わせの種類</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->content }}</option>
-                @endforeach
-            </select>
-            <input type="date" name="date">
-            <button type="submit" class="btn search-btn">検索</button>
-            <a href="{{ route('admin.index') }}" class="btn reset-btn">リセット</a>
-        </form>
 
-        {{-- エクスポートボタン --}}
-        <div class="export-area">
-            <button class="btn export-btn">エクスポート</button>
-        </div>
-
-        {{-- テーブル --}}
         <table class="contact-table">
             <thead>
                 <tr>
@@ -62,16 +37,74 @@
                     </td>
                     <td>{{ $contact->email }}</td>
                     <td>{{ $contact->category->content }}</td>
-                    <td><a href="{{ route('admin.detail', $contact->id) }}" class="detail-btn">詳細</a></td>
+                    <td>
+                        <button 
+                            class="detail-btn" 
+                            data-name="{{ $contact->last_name }} {{ $contact->first_name }}"
+                            data-gender="@if($contact->gender == 1) 男性 @elseif($contact->gender == 2) 女性 @else その他 @endif"
+                            data-email="{{ $contact->email }}"
+                            data-category="{{ $contact->category->content }}"
+                            data-detail="{{ $contact->detail }}"
+                            data-address="{{ $contact->address }}"
+                            data-tel="{{ $contact->tel }}"
+                        >
+                            詳細
+                        </button>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
-        {{-- ページネーション --}}
-        <div class="pagination">
-            {{ $contacts->links('vendor.pagination.default') }}
+        {{-- モーダル --}}
+        <div id="detailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3>お問い合わせ詳細</h3>
+                <p><strong>お名前：</strong> <span id="modalName"></span></p>
+                <p><strong>性別：</strong> <span id="modalGender"></span></p>
+                <p><strong>メールアドレス：</strong> <span id="modalEmail"></span></p>
+                <p><strong>住所：</strong> <span id="modalAddress"></span></p>
+                <p><strong>電話番号：</strong> <span id="modalTel"></span></p>
+                <p><strong>お問い合わせの種類：</strong> <span id="modalCategory"></span></p>
+                <p><strong>お問い合わせ内容：</strong></p>
+                <p id="modalDetail" class="modal-text"></p>
+            </div>
         </div>
     </main>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("detailModal");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // 詳細ボタンクリックでモーダルを開く
+    document.querySelectorAll(".detail-btn").forEach(button => {
+        button.addEventListener("click", function() {
+            document.getElementById("modalName").textContent = this.dataset.name;
+            document.getElementById("modalGender").textContent = this.dataset.gender;
+            document.getElementById("modalEmail").textContent = this.dataset.email;
+            document.getElementById("modalAddress").textContent = this.dataset.address;
+            document.getElementById("modalTel").textContent = this.dataset.tel;
+            document.getElementById("modalCategory").textContent = this.dataset.category;
+            document.getElementById("modalDetail").textContent = this.dataset.detail;
+
+            modal.style.display = "flex";
+        });
+    });
+
+    // 閉じるボタン
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // モーダル外クリックで閉じる
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+</script>
 @endsection
