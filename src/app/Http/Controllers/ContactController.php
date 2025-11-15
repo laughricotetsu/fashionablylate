@@ -16,12 +16,13 @@ class ContactController extends Controller
 
         $categories = Category::all();
 
+        $contacts = Contact::simplePaginate(7);
+
         return view('contacts.form', compact('categories', 'inputs'));
     }
 
     public function confirm(Request $request)
     {
-        // バリデーション
         $validated = $request->validate([
             'last_name'   => 'required',
             'first_name'  => 'required',
