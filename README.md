@@ -1,5 +1,5 @@
 # fashionablylate
-リポジトリの設定
+リポジトリの設定 
 　　＄ git clone git@github.com:laughricotetsu/fashionablylate.git
 リモートリポジトリの作成及びURLの取得
 リモートリポジトリのURLの変更
