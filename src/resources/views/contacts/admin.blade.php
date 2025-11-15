@@ -8,8 +8,14 @@
 <div class="admin-container">
     <header class="admin-header">
         <h1 class="site-title">FashionablyLate</h1>
-        <a href="/logout" class="logout-btn">logout</a>
+        <form action="/logout" method="post">
+            <input type="submit" value="logout">
+             @csrf
+        </form>
+        <!-- <a href="/logout" class="logout-btn">logout</a> -->
     </header>
+
+
 
     <main class="admin-main">
         <h2 class="page-title">Admin</h2>

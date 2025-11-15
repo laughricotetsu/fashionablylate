@@ -8,7 +8,10 @@
 <div class="admin-container">
     <header class="admin-header">
         <h1 class="site-title">FashionablyLate</h1>
-        <a href="/logout" class="logout-btn">logout</a>
+        <!-- <a href="/logout" class="logout-btn">logout</a> -->
+        <form action="/logout" method="post">
+            <input type="submit" value="logout">
+        </form>
     </header>
 
     <main class="admin-main">
