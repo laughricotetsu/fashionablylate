@@ -1,20 +1,20 @@
 # fashionablylate
-リポジトリの設定 
-　　＄ git clone git@github.com:laughricotetsu/fashionablylate.git
-リモートリポジトリの作成及びURLの取得
-リモートリポジトリのURLの変更
-　　$ cd fashionablylate
-　　$ git remote set -url origin 作成したリポジトリのURL
-　　$ git remote -v
-ローカルリポジトリの内容をリモートに反映させる
-   $ git add .
-   $ git commit -m "リモートリポジトリの変更"
-   $ git push origin main
-Dockerの設定
-   $ docker-compose up -d --build
-   $ code .
-Laravelのパッケージのインストール
-   $ docker-compose exec php bash
+リポジトリの設定  
+　　＄ git clone git@github.com:laughricotetsu/fashionablylate.git  
+リモートリポジトリの作成及びURLの取得  
+リモートリポジトリのURLの変更  
+　　$ cd fashionablylate  
+　　$ git remote set -url origin 作成したリポジトリのURL  
+　　$ git remote -v  
+ローカルリポジトリの内容をリモートに反映させる  
+   $ git add .  
+   $ git commit -m "リモートリポジトリの変更"  
+   $ git push origin main  
+Dockerの設定  
+   $ docker-compose up -d --build  
+   $ code .  
+Laravelのパッケージのインストール  
+   $ docker-compose exec php bash  
    $ docker install
 .envファイルの作成（.env.exampleファイルから.envファイルを作成し、環境変数を変更）
  （.envファイルの作成）
